@@ -208,13 +208,9 @@ function work(){
   ${workGroups()}`;
 }
 function workGroups(){
-  const top = D.shows.slice(0,9).map(s=>s.slug).concat(['hair','the-revolutionists','the-barber-of-seville','re-generation']);
-  const nyc = s => /New York|Off-Broadway|Central Park/.test(s.place||'');
-  const school = ['o-pioneers','big-love'];
-  const g1 = top.map(k=>bySlug[k]);
-  const g2 = D.shows.filter(s=>!top.includes(s.slug) && !school.includes(s.slug) && nyc(s));
-  const g3 = D.shows.filter(s=>!top.includes(s.slug) && !nyc(s));
-  return `<div class="wall">${g1.concat(g2,g3,school.map(k=>bySlug[k])).map(tile).join('')}</div>`;
+  const order = D.shows.slice(0,9).map(s=>s.slug).concat(['hair','lone-star-spirits','frankenstein','the-revolutionists','the-barber-of-seville','re-generation','the-man-who-came-to-dinner','the-seagull','a-midsummer-nights-dream','bus-stop','sweet-charity','dirty-rotten-scoundrels','xanadu','o-pioneers','big-love']);
+  const rest = D.shows.filter(s=>!order.includes(s.slug));
+  return `<div class="wall">${order.map(k=>bySlug[k]).concat(rest).map(tile).join('')}</div>`;
 }
 
 function layoutGallery(imgs, title){
