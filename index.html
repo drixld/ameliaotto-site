@@ -1,0 +1,329 @@
+<title>Amelia Otto</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Hanken+Grotesk:wght@300;400;500&display=swap">
+<style>
+/* Layout: a dark house-lights-down portfolio. Photos carry all the color.
+   Quiet header, one framed hero slideshow, masonry wall, photo-essay project pages. */
+:root{
+  color-scheme: dark;
+  --ink:#131110;        /* page */
+  --ink-2:#1c1917;      /* raised areas */
+  --paper:#eee7dc;      /* text */
+  --muted:#a69d91;      /* secondary text */
+  --line:#332e29;       /* hairlines */
+  --glow:#e8d5b2;       /* hover / focus */
+  --display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --body:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{
+  background:var(--ink);color:var(--paper);font:300 16px/1.65 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 64px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--ink);z-index:30}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:1360px;margin:0 auto}
+
+/* draft strip */
+.draft{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 0;display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;border-bottom:1px solid var(--line)}
+.draft a{color:var(--glow);border-bottom:1px solid currentColor}
+
+/* header */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ink);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:baseline;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;padding-block:18px}
+.brand{font:400 28px/1 var(--display);letter-spacing:.01em}
+nav{display:flex;gap:6px 28px;flex-wrap:wrap}
+nav a{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:4px 0;border-bottom:1px solid transparent}
+nav a:hover,nav a[aria-current="page"]{color:var(--paper);border-bottom-color:var(--glow)}
+
+/* hero */
+.hero{margin-top:28px;position:relative;height:clamp(300px,min(50vw,calc(100vh - 130px)),720px);width:100%;overflow:hidden;background:var(--ink-2)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%;opacity:0;transition:opacity 1.2s ease}
+.hero img.on{opacity:1}
+.hero .cap{position:absolute;left:0;right:0;bottom:0;padding:48px 24px 20px;background:linear-gradient(to top,rgba(19,17,16,.85),rgba(19,17,16,0));display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.hero .cap a{font:italic 400 clamp(20px,2.4vw,30px)/1.2 var(--display)}
+.hero .cap small{display:block;font:300 13px/1.4 var(--body);letter-spacing:.06em;color:var(--muted);margin-top:2px;font-style:normal}
+.dots{display:flex;gap:8px}
+.dots button{width:10px;height:10px;border-radius:50%;border:1px solid var(--paper);background:transparent;padding:0;cursor:pointer}
+.dots button[aria-current="true"]{background:var(--paper)}
+
+.intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px 64px;padding-block:56px 40px;align-items:end}
+.intro h1{font:400 clamp(40px,6vw,84px)/1 var(--display);margin:0;letter-spacing:-.01em;text-wrap:balance}
+.intro h1 span{display:block;font:italic 400 .42em/1.4 var(--display);color:var(--muted);margin-top:10px}
+.intro p{margin:0;font-size:18px;max-width:46ch;color:var(--paper)}
+@media(max-width:760px){.intro{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:620px){.hero{height:auto;aspect-ratio:4/3;margin-top:20px}.hero .cap{padding:40px 16px 14px}}
+
+h2.sec{font:400 13px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 20px;display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+h2.sec a{color:var(--glow)}
+
+/* wall */
+.wall{columns:3 300px;column-gap:14px}
+.tile{display:block;position:relative;break-inside:avoid;margin:0 0 14px;background:var(--ink-2);overflow:hidden}
+.tile img{width:100%;transition:transform .7s ease,filter .4s ease}
+.tile .t{position:absolute;inset:auto 0 0 0;padding:44px 16px 14px;background:linear-gradient(to top,rgba(19,17,16,.9),rgba(19,17,16,0));opacity:0;transition:opacity .3s ease}
+.tile .t b{display:block;font:italic 400 21px/1.2 var(--display)}
+.tile .t span{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tile:hover img,.tile:focus-visible img{transform:scale(1.025)}
+.tile:hover .t,.tile:focus-visible .t{opacity:1}
+@media(hover:none){.tile .t{opacity:1}}
+
+/* page heads */
+.head{padding-block:48px 28px}
+.head h1{font:400 clamp(34px,5vw,64px)/1.05 var(--display);margin:0;text-wrap:balance}
+.head .kick{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+.head p{color:var(--muted);margin:12px 0 0;max-width:60ch}
+
+/* project */
+.credits{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px 36px;margin:28px 0 8px;padding-block:20px;border-block:1px solid var(--line)}
+.credits dt{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.credits dd{margin:4px 0 0;font-size:16px}
+.note{margin:18px 0 0;font:italic 400 20px/1.4 var(--display);color:var(--glow)}
+.gal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:28px}
+.gal figure{margin:0;min-width:0}
+.gal .full{grid-column:1 / -1}
+.gal .solo{grid-column:1 / -1;justify-self:center;width:min(100%,640px)}
+.gal button{display:block;width:100%;padding:0;border:0;background:var(--ink-2);cursor:zoom-in}
+.gal img{width:100%}
+@media(max-width:620px){.gal{grid-template-columns:minmax(0,1fr)}}
+.nextprev{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:56px;padding-top:24px;border-top:1px solid var(--line)}
+.nextprev a{font:italic 400 22px/1.3 var(--display)}
+.nextprev small{display:block;font:300 11px/1.6 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-style:normal}
+.back{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.back:hover{color:var(--paper)}
+
+/* sketches */
+.skgroup{margin-top:56px}
+.skgroup h2{font:400 clamp(24px,3vw,36px)/1.2 var(--display);margin:0}
+.skgroup p{margin:4px 0 18px;color:var(--muted)}
+.skgrid{columns:4 220px;column-gap:14px}
+.skgrid button{display:block;width:100%;margin:0 0 14px;padding:0;border:0;background:#fff;break-inside:avoid;cursor:zoom-in}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px 72px;padding-block:8px 24px}
+.about p{margin:0 0 1.2em;font-size:18px;max-width:58ch}
+.about .facts h3{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0 0 8px;font-weight:400}
+.about .facts div{margin-bottom:28px;font-size:16px}
+.about .facts div p{font-size:16px;margin:0 0 .4em}
+.portrait{margin:0 0 28px;max-width:380px}.portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 28%}
+.btn{display:inline-block;border:1px solid var(--paper);padding:10px 22px;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.btn[aria-disabled="true"]{border-color:var(--line);color:var(--muted)}
+@media(max-width:760px){.about{grid-template-columns:minmax(0,1fr)}}
+
+/* contact / review */
+.plain{max-width:60ch;padding-bottom:24px}
+.plain p{font-size:18px;margin:0 0 1em}
+.todo{border:1px dashed var(--muted);padding:2px 8px;color:var(--glow)}
+.review ul{padding-left:1.1em;margin:0 0 28px}
+.review li{margin-bottom:6px}
+.review h3{font:400 13px/1 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:32px 0 12px}
+
+footer{border-top:1px solid var(--line);margin-top:72px;padding-top:20px;font-size:13px;color:var(--muted);letter-spacing:.06em}
+
+/* lightbox */
+#lb{position:fixed;inset:0;background:rgba(10,9,8,.96);z-index:50;display:none;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+#lb.open{display:flex}
+#lb img{max-height:100%;max-width:100%;object-fit:contain}
+#lb button{position:absolute;background:none;border:1px solid var(--line);color:var(--paper);width:44px;height:44px;font-size:20px;cursor:pointer}
+#lb .x{top:max(16px,env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+#lb .p{left:max(12px,env(safe-area-inset-left,0px));top:50%}
+#lb .n{right:max(12px,env(safe-area-inset-right,0px));top:50%}
+#lb .c{position:absolute;bottom:max(16px,env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;font-size:13px;color:var(--muted);letter-spacing:.08em}
+
+@media (prefers-reduced-motion:reduce){.hero img,.tile img,.tile .t{transition:none}}
+</style>
+
+<header class="bar"><div class="wrap">
+  <a class="brand" href="#home">Amelia Otto</a>
+  <nav aria-label="Main">
+    <a href="#work" data-nav="work">Work</a>
+    <a href="#sketches" data-nav="sketches">Sketches</a>
+    <a href="#about" data-nav="about">About</a>
+    <a href="#contact" data-nav="contact">Contact</a>
+  </nav>
+</div></header>
+<main class="wrap" id="app"></main>
+<div class="wrap"><footer>Amelia Otto &middot; Costume Designer &middot; Dallas, Texas</footer></div>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="x" aria-label="Close">&times;</button>
+  <button class="p" aria-label="Previous">&#8249;</button>
+  <img alt="">
+  <button class="n" aria-label="Next">&#8250;</button>
+  <div class="c"></div>
+</div>
+
+<script>
+const D = {"shows": [{"slug": "lion-in-winter", "title": "The Lion in Winter", "company": "Theatre Three", "place": "Dallas, TX", "year": "2025", "director": "Matthew Gray", "photos": "Linda Blase", "imgs": [{"f": "img/lion-in-winter/l0.jpg", "w": 1700, "h": 1133, "src": "attachment"}, {"f": "img/lion-in-winter/01.jpg", "w": 1200, "h": 1500, "src": "601822188_1511830644276480_624205365229228593_n.jpg"}, {"f": "img/lion-in-winter/02.jpg", "w": 1200, "h": 1500, "src": "597846916_1504668348326043_4921721302160499553_n.jpg"}, {"f": "img/lion-in-winter/03.jpg", "w": 1200, "h": 1500, "src": "601126528_1511830587609819_5692059594989789521_n.jpg"}, {"f": "img/lion-in-winter/05.jpg", "w": 1092, "h": 1365, "src": "603052610_1511830874276457_7398492617050568781_n.jpg"}, {"f": "img/lion-in-winter/06.jpg", "w": 1500, "h": 1000, "src": "604341415_1514895040636707_3959212166591476850_n.jpg"}, {"f": "img/lion-in-winter/07.jpg", "w": 503, "h": 763, "src": "LIW Renderings.png"}]}, {"slug": "ballad-of-little-jo", "title": "The Ballad of Little Jo", "company": "WaterTower Theatre", "place": "Addison, TX", "year": "2019", "director": "Kelsey Leigh Ervi", "photos": "Jason Anderson", "imgs": [{"f": "img/ballad-of-little-jo/b01.jpg", "w": 1500, "h": 1000, "src": "Ballad of Little Jo_109.jpg"}, {"f": "img/ballad-of-little-jo/b02.jpg", "w": 1000, "h": 1500, "src": "Ballad of Little Jo_003.jpg"}, {"f": "img/ballad-of-little-jo/b03.jpg", "w": 1500, "h": 1000, "src": "Ballad of Little Jo_162.jpg"}, {"f": "img/ballad-of-little-jo/b04.jpg", "w": 1500, "h": 1000, "src": "Ballad of Little Jo_133.jpg"}, {"f": "img/ballad-of-little-jo/b05.jpg", "w": 1500, "h": 1000, "src": "4I5A2293.jpg"}, {"f": "img/ballad-of-little-jo/b06.jpg", "w": 1500, "h": 1000, "src": "Ballad of Little Jo_064.jpg"}, {"f": "img/ballad-of-little-jo/b07.jpg", "w": 1500, "h": 1000, "src": "Ballad of Little Jo_096.jpg"}, {"f": "img/ballad-of-little-jo/b08.jpg", "w": 1500, "h": 1125, "src": "Caroline.jpg"}, {"f": "img/ballad-of-little-jo/b09.jpg", "w": 1500, "h": 1125, "src": "Jo.jpg"}, {"f": "img/ballad-of-little-jo/b10.jpg", "w": 1500, "h": 1125, "src": "Josephine.jpg"}]}, {"slug": "spring-awakening", "title": "Spring Awakening", "company": "Theatre Three", "place": "Dallas, TX", "year": "2026", "director": "Emily Gray", "photos": "Jeffrey Schmidt", "imgs": [{"f": "img/spring-awakening/s0.jpg", "w": 1700, "h": 1161, "src": "attachment"}, {"f": "img/spring-awakening/01.jpg", "w": 1500, "h": 1142, "src": "SpringProd-398.jpg"}, {"f": "img/spring-awakening/02.jpg", "w": 1000, "h": 1500, "src": "SpringProd-1217.jpg"}, {"f": "img/spring-awakening/03.jpg", "w": 1500, "h": 1085, "src": "SpringProd-334.jpg"}, {"f": "img/spring-awakening/04.jpg", "w": 1500, "h": 1000, "src": "SpringProd-207.jpg"}, {"f": "img/spring-awakening/05.jpg", "w": 1500, "h": 1038, "src": "SpringProd-1770.jpg"}, {"f": "img/spring-awakening/06.jpg", "w": 1500, "h": 1000, "src": "SpringProd-727.jpg"}, {"f": "img/spring-awakening/07.jpg", "w": 1000, "h": 1500, "src": "SpringProd-1949.jpg"}]}, {"slug": "born-yesterday", "title": "Born Yesterday", "company": "Northern Stage", "place": "Vermont", "year": "2012", "director": "Catherine Doherty", "photos": "Oscar Blustin", "imgs": [{"f": "img/born-yesterday/03.jpg", "w": 1024, "h": 683, "src": "8232042391_01bcb5db77_b.jpg"}, {"f": "img/born-yesterday/01.jpg", "w": 1024, "h": 683, "src": "8232035025_7f4f95332d_b.jpg"}, {"f": "img/born-yesterday/02.jpg", "w": 1024, "h": 683, "src": "8232036461_5cb2cea830_b.jpg"}, {"f": "img/born-yesterday/04.jpg", "w": 1024, "h": 683, "src": "8232001477_f45524f72e_b.jpg"}, {"f": "img/born-yesterday/05.jpg", "w": 1024, "h": 683, "src": "8233089798_4e3282b370_b.jpg"}, {"f": "img/born-yesterday/06.jpg", "w": 683, "h": 1024, "src": "8233121098_0285e11596_b.jpg"}, {"f": "img/born-yesterday/07.jpg", "w": 1024, "h": 683, "src": "8232082297_9b1f8a7e3c_b.jpg"}]}, {"slug": "titus-andronicus", "title": "Titus Andronicus", "company": "Shakespeare Dallas", "place": "Dallas, TX", "year": "2026", "director": "Danielle Georgiou", "photos": "Linda Blase", "imgs": [{"f": "img/titus-andronicus/01.jpg", "w": 1500, "h": 1000, "src": "SD 261 TITUS ANDRONICUS  26-1 copy.jpg"}, {"f": "img/titus-andronicus/02.jpg", "w": 1500, "h": 1000, "src": "SD 108 TITUS ANDRONICUS  26-1 copy.jpg"}, {"f": "img/titus-andronicus/03.jpg", "w": 1500, "h": 1000, "src": "SD 152 TITUS ANDRONICUS  26-1 copy.jpg"}, {"f": "img/titus-andronicus/04.jpg", "w": 1500, "h": 1000, "src": "SD 262 TITUS ANDRONICUS  26-1 copy.jpg"}]}, {"slug": "the-importance-of-being-earnest", "title": "The Importance of Being Earnest", "company": "NYU", "place": "The Atlas Room, New York", "year": "2009", "director": "Sam Gold", "photos": "Ella Bromlin", "imgs": [{"f": "img/the-importance-of-being-earnest/02.jpg", "w": 800, "h": 717, "src": "Algernon.jpg"}, {"f": "img/the-importance-of-being-earnest/03.jpg", "w": 800, "h": 734, "src": "jack1 copy.jpg"}, {"f": "img/the-importance-of-being-earnest/04.jpg", "w": 800, "h": 643, "src": "lady1.jpg"}, {"f": "img/the-importance-of-being-earnest/05.jpg", "w": 800, "h": 680, "src": "newgwen1 copy.jpg"}, {"f": "img/the-importance-of-being-earnest/01.jpg", "w": 1001, "h": 1500, "src": "Earnest 2, 2009, photo by Ella Bromblin (39).jpg"}, {"f": "img/the-importance-of-being-earnest/06.jpg", "w": 1002, "h": 1500, "src": "Earnest, 2009, photo by Ella Bromblin (11).jpg"}]}, {"slug": "crystal-city-1969", "title": "Crystal City 1969", "company": "Cara Mía Theatre", "place": "Dallas, TX", "year": "2022", "director": "David Lozano", "imgs": [{"f": "img/crystal-city-1969/c0.jpg", "w": 1700, "h": 1135, "src": "attachment"}, {"f": "img/crystal-city-1969/01.jpg", "w": 1447, "h": 1500, "src": "CrystalCity-27.jpeg"}, {"f": "img/crystal-city-1969/02.jpg", "w": 1335, "h": 1185, "src": "CrystalCity-17-e1670278495324.jpeg"}, {"f": "img/crystal-city-1969/03.jpg", "w": 1500, "h": 1090, "src": "CrystalCity-29.jpeg"}, {"f": "img/crystal-city-1969/04.jpg", "w": 1500, "h": 1066, "src": "CrystalCity-32.jpeg"}, {"f": "img/crystal-city-1969/05.jpg", "w": 1500, "h": 1001, "src": "CrystalCity-38-EDIT.jpeg"}]}, {"slug": "bike-america", "title": "Bike America", "company": "Ma-Yi Theatre Company", "place": "Off-Broadway, New York", "year": "2013", "director": "Moritz von Stuelpnagel", "imgs": [{"f": "img/bike-america/01.jpg", "w": 1229, "h": 814, "src": "_DSC4611-2791075308-L.jpg"}, {"f": "img/bike-america/02.jpg", "w": 814, "h": 1229, "src": "_DSC4654-2791074985-L.jpg"}, {"f": "img/bike-america/03.jpg", "w": 1229, "h": 814, "src": "_DSC4717-2791074480-L.jpg"}, {"f": "img/bike-america/04.jpg", "w": 814, "h": 1229, "src": "_DSC4643-2791075075-L.jpg"}, {"f": "img/bike-america/05.jpg", "w": 1229, "h": 814, "src": "_DSC4769-2791073993-L.jpg"}, {"f": "img/bike-america/06.jpg", "w": 814, "h": 1229, "src": "_DSC4806-2791073731-L.jpg"}]}, {"slug": "emilia", "title": "Emilia", "company": "Dallas College", "place": "Dallas, TX", "director": "Emily Gray", "photos": "George Hagele", "note": "Winner of 21 awards at KCACTF.", "imgs": [{"f": "img/emilia/01.jpg", "w": 1206, "h": 1324, "src": "Emilia3.jpg"}, {"f": "img/emilia/02.jpg", "w": 985, "h": 686, "src": "Emilia2.jpg"}, {"f": "img/emilia/03.jpg", "w": 760, "h": 547, "src": "Emilia.jpg"}, {"f": "img/emilia/04.jpg", "w": 590, "h": 333, "src": "Emilia5.jpg"}]}, {"slug": "o-pioneers", "title": "O, Pioneers!", "company": "Marymount Manhattan College", "place": "New York", "year": "2014", "director": "Kevin Connell", "photos": "Jerry Goodstein", "imgs": [{"f": "img/o-pioneers/01.jpg", "w": 640, "h": 960, "src": "10407804_457694497703044_6322212969782849333_n.jpg"}, {"f": "img/o-pioneers/02.jpg", "w": 960, "h": 640, "src": "10339730_457696257702868_1632336529208604808_n.jpg"}, {"f": "img/o-pioneers/03.jpg", "w": 960, "h": 640, "src": "1493203_457694797703014_1728399668496003274_n.jpg"}, {"f": "img/o-pioneers/04.jpg", "w": 960, "h": 640, "src": "14316_457696514369509_4169068708223214597_n.jpg"}, {"f": "img/o-pioneers/05.jpg", "w": 960, "h": 640, "src": "6285_457694201036407_4323176837113740776_n.jpg"}, {"f": "img/o-pioneers/06.jpg", "w": 1500, "h": 1024, "src": "Bergson Family 1.jpeg"}, {"f": "img/o-pioneers/07.jpg", "w": 1500, "h": 1024, "src": "Bergson Family 2.jpeg"}, {"f": "img/o-pioneers/08.jpg", "w": 640, "h": 960, "src": "10357519_457691714369989_4057411802072309431_n.jpg"}]}, {"slug": "the-revolutionists", "title": "The Revolutionists", "company": "Dallas College", "place": "Dallas, TX", "director": "Andy Long", "photos": "George Hagele", "imgs": [{"f": "img/the-revolutionists/01.jpg", "w": 957, "h": 1278, "src": "Revolution3.jpg"}, {"f": "img/the-revolutionists/02.jpg", "w": 1083, "h": 1500, "src": "Revolutionists9.jpeg"}, {"f": "img/the-revolutionists/03.jpg", "w": 906, "h": 1260, "src": "Revolution7.jpg"}, {"f": "img/the-revolutionists/04.jpg", "w": 1143, "h": 1500, "src": "Revolution5.jpg"}, {"f": "img/the-revolutionists/05.jpg", "w": 331, "h": 732, "src": "Revolution4.jpg"}]}, {"slug": "big-love", "title": "Big Love", "company": "Columbia Stages", "place": "New York", "year": "2009", "director": "Pirronne Yousefzadeh", "imgs": [{"f": "img/big-love/01.jpg", "w": 1500, "h": 1001, "src": "BigLove0300.jpg"}, {"f": "img/big-love/02.jpg", "w": 1500, "h": 1198, "src": "BigLove0050.jpg"}, {"f": "img/big-love/03.jpg", "w": 1500, "h": 1203, "src": "DSC_8744.jpg"}, {"f": "img/big-love/04.jpg", "w": 1500, "h": 1202, "src": "BigLove0054.jpg"}, {"f": "img/big-love/05.jpg", "w": 1500, "h": 937, "src": "DSC_8893.jpg"}, {"f": "img/big-love/06.jpg", "w": 1500, "h": 959, "src": "DSC_8894.jpg"}, {"f": "img/big-love/07.jpg", "w": 999, "h": 1368, "src": "DSC_8898.jpg"}, {"f": "img/big-love/08.jpg", "w": 999, "h": 1395, "src": "DSC_8903.jpg"}]}, {"slug": "the-man-who-came-to-dinner", "title": "The Man Who Came to Dinner", "company": "Peccadillo Theatre Company", "place": "Off-Broadway, New York", "year": "2011", "director": "Dan Wackerman", "imgs": [{"f": "img/the-man-who-came-to-dinner/01.jpg", "w": 1382, "h": 987, "src": "Man:Dinner14.jpg"}, {"f": "img/the-man-who-came-to-dinner/02.jpg", "w": 887, "h": 1242, "src": "Man:Dinner04.jpg"}, {"f": "img/the-man-who-came-to-dinner/03.jpg", "w": 1500, "h": 1000, "src": "ManWhoCameDinner0025.JPG"}, {"f": "img/the-man-who-came-to-dinner/04.jpg", "w": 1500, "h": 1000, "src": "ManWhoCameDinner0005.JPG"}, {"f": "img/the-man-who-came-to-dinner/05.jpg", "w": 1500, "h": 1000, "src": "ManWhoCameDinner0002.JPG"}, {"f": "img/the-man-who-came-to-dinner/06.jpg", "w": 1500, "h": 1000, "src": "ManWhoCameDinner0017.JPG"}]}, {"slug": "hair", "title": "Hair", "company": "Alpine Theatre Project", "place": "Montana", "year": "2010", "director": "Betsi Morrison", "imgs": [{"f": "img/hair/h0.jpg", "w": 1600, "h": 1142, "src": "Hair 2-1.jpg"}, {"f": "img/hair/01.jpg", "w": 611, "h": 437, "src": "Hair 2-3.jpg"}, {"f": "img/hair/02.jpg", "w": 559, "h": 699, "src": "Hair 2-2.jpg"}, {"f": "img/hair/03.jpg", "w": 1071, "h": 1500, "src": "Hair1 2.jpg"}, {"f": "img/hair/04.jpg", "w": 628, "h": 448, "src": "Hair2 2.jpg"}, {"f": "img/hair/05.jpg", "w": 1219, "h": 1500, "src": "Hair1.jpg"}, {"f": "img/hair/06.jpg", "w": 1216, "h": 1500, "src": "Hair2.jpg"}, {"f": "img/hair/07.jpg", "w": 1223, "h": 1500, "src": "Hair3.jpg"}, {"f": "img/hair/08.jpg", "w": 1191, "h": 1500, "src": "Hair7.jpg"}]}, {"slug": "the-seagull", "title": "The Seagull", "company": "New York Classical Theatre", "place": "New York", "year": "2013", "director": "Stephen Burdman", "imgs": [{"f": "img/the-seagull/01.jpg", "w": 801, "h": 532, "src": "seagull 1.jpg"}, {"f": "img/the-seagull/02.jpg", "w": 800, "h": 532, "src": "seagull 2.jpg"}, {"f": "img/the-seagull/03.jpg", "w": 650, "h": 494, "src": "Theater - Chekhov - The Seagull - June 2013 - 8.jpg"}, {"f": "img/the-seagull/04.jpg", "w": 1145, "h": 1500, "src": "Dorn-Seagull.jpg"}, {"f": "img/the-seagull/05.jpg", "w": 1181, "h": 1500, "src": "Irina-Seagull.jpg"}, {"f": "img/the-seagull/06.jpg", "w": 1165, "h": 1500, "src": "Nina-Seagull.jpg"}, {"f": "img/the-seagull/07.jpg", "w": 1186, "h": 1500, "src": "Treplyov-Seagull.jpg"}, {"f": "img/the-seagull/08.jpg", "w": 556, "h": 627, "src": "Theater - Chekhov - The Seagull - June 2013 - 7.jpg"}]}, {"slug": "a-midsummer-nights-dream", "title": "A Midsummer Night’s Dream", "company": "New York Classical Theatre", "place": "Central Park, New York", "year": "2016", "director": "Sean Hagerty", "photos": "Miranda Arden", "imgs": [{"f": "img/a-midsummer-nights-dream/01.jpg", "w": 1500, "h": 994, "src": "midsummer 1.jpg"}, {"f": "img/a-midsummer-nights-dream/02.jpg", "w": 994, "h": 1500, "src": "msnd-nyct-3.jpg"}, {"f": "img/a-midsummer-nights-dream/03.jpg", "w": 1500, "h": 994, "src": "msnd-nyct-2.jpg"}, {"f": "img/a-midsummer-nights-dream/04.jpg", "w": 1110, "h": 1500, "src": "Titania086.jpg"}, {"f": "img/a-midsummer-nights-dream/05.jpg", "w": 1125, "h": 1500, "src": "Puck.jpg"}, {"f": "img/a-midsummer-nights-dream/06.jpg", "w": 1110, "h": 1500, "src": "Hermia woods089.jpg"}, {"f": "img/a-midsummer-nights-dream/07.jpg", "w": 1125, "h": 1500, "src": "Bottom.jpg"}]}, {"slug": "frankenstein", "title": "Frankenstein", "company": "Hudson Guild Theatre", "place": "New York", "year": "2013", "director": "Jim Furlong", "imgs": [{"f": "img/frankenstein/01.jpg", "w": 960, "h": 639, "src": "31911_10151387073579843_1867355110_n.jpg"}, {"f": "img/frankenstein/02.jpg", "w": 640, "h": 960, "src": "206353_10151387073829843_1029096664_n.jpg"}, {"f": "img/frankenstein/03.jpg", "w": 960, "h": 639, "src": "484113_10151387070949843_1224547869_n.jpg"}, {"f": "img/frankenstein/04.jpg", "w": 960, "h": 639, "src": "541210_10151387072694843_1790804186_n.jpg"}]}, {"slug": "xanadu", "title": "Xanadu", "company": "Summer Repertory Theatre", "place": "Santa Rosa, CA", "director": "Anne McAlexander", "photos": "Tom Chown", "imgs": [{"f": "img/xanadu/01.jpg", "w": 1500, "h": 1001, "src": "©TOM CHOWN51341.JPG"}, {"f": "img/xanadu/02.jpg", "w": 1001, "h": 1500, "src": "©TOM CHOWN51348.JPG"}, {"f": "img/xanadu/03.jpg", "w": 1500, "h": 998, "src": "_DSC1449.jpg"}, {"f": "img/xanadu/04.jpg", "w": 490, "h": 480, "src": "X31.jpg"}, {"f": "img/xanadu/05.jpg", "w": 640, "h": 408, "src": "glitter shot.jpg"}]}, {"slug": "sweet-charity", "title": "Sweet Charity", "company": "Summer Repertory Theatre", "place": "Santa Rosa, CA", "director": "Jeff Whetstone", "photos": "Tom Chown", "imgs": [{"f": "img/sweet-charity/01.jpg", "w": 997, "h": 1500, "src": "©TOM CHOWN34730.jpg"}, {"f": "img/sweet-charity/02.jpg", "w": 1500, "h": 997, "src": "©TOM CHOWN34378.jpg"}, {"f": "img/sweet-charity/03.jpg", "w": 1500, "h": 997, "src": "©TOM CHOWN34366.jpg"}, {"f": "img/sweet-charity/04.jpg", "w": 997, "h": 1500, "src": "©TOM CHOWN34360.jpg"}, {"f": "img/sweet-charity/05.jpg", "w": 1500, "h": 997, "src": "©TOM CHOWN34883.jpg"}, {"f": "img/sweet-charity/06.jpg", "w": 997, "h": 1500, "src": "©TOM CHOWN34361.jpg"}, {"f": "img/sweet-charity/07.jpg", "w": 1500, "h": 997, "src": "©TOM CHOWN34385.jpg"}]}, {"slug": "dirty-rotten-scoundrels", "title": "Dirty Rotten Scoundrels", "company": "Summer Repertory Theatre", "place": "Santa Rosa, CA", "director": "Anne McAlexander", "imgs": [{"f": "img/dirty-rotten-scoundrels/01.jpg", "w": 1500, "h": 1072, "src": "DRS 2-1.jpg"}, {"f": "img/dirty-rotten-scoundrels/02.jpg", "w": 1500, "h": 1072, "src": "DRS 2-7.jpg"}, {"f": "img/dirty-rotten-scoundrels/03.jpg", "w": 1500, "h": 999, "src": "DRS 2-4.jpg"}, {"f": "img/dirty-rotten-scoundrels/04.jpg", "w": 1500, "h": 1099, "src": "DRS 2-6.jpg"}, {"f": "img/dirty-rotten-scoundrels/05.jpg", "w": 977, "h": 1500, "src": "DRS2.jpg"}, {"f": "img/dirty-rotten-scoundrels/06.jpg", "w": 1127, "h": 1500, "src": "Christine 3.jpg"}, {"f": "img/dirty-rotten-scoundrels/07.jpg", "w": 1127, "h": 1500, "src": "Hotel Staff 2.jpg"}, {"f": "img/dirty-rotten-scoundrels/08.jpg", "w": 1127, "h": 1500, "src": "Muriel 1.jpg"}]}, {"slug": "lone-star-spirits", "title": "Lone Star Spirits", "company": "4th Street Theater", "place": "New York", "year": "2016", "director": "Wes Grantom", "photos": "Alex Woodhouse", "note": "World premiere.", "imgs": [{"f": "img/lone-star-spirits/02.jpg", "w": 1500, "h": 1000, "src": "i-bXRXBjK-2712x1808.jpg"}, {"f": "img/lone-star-spirits/01.jpg", "w": 1500, "h": 1000, "src": "i-gbMp4jr-2444x1629.jpg"}, {"f": "img/lone-star-spirits/03.jpg", "w": 1500, "h": 1000, "src": "i-kGWJbXn-2742x1828.jpg"}, {"f": "img/lone-star-spirits/04.jpg", "w": 1280, "h": 854, "src": "i-xJzCqbV-X2.jpg"}]}, {"slug": "bus-stop", "title": "Bus Stop", "company": "NYU", "place": "Walker Theatre, New York", "year": "2007", "director": "Pam Berlin", "imgs": [{"f": "img/bus-stop/01.jpg", "w": 1195, "h": 1500, "src": "Picture 164.jpg"}, {"f": "img/bus-stop/02.jpg", "w": 1205, "h": 1500, "src": "Picture 029.jpg"}, {"f": "img/bus-stop/03.jpg", "w": 1195, "h": 1500, "src": "Picture 206.jpg"}, {"f": "img/bus-stop/04.jpg", "w": 1500, "h": 1271, "src": "Picture 273.jpg"}, {"f": "img/bus-stop/05.jpg", "w": 1500, "h": 1070, "src": "Picture 043.jpg"}]}, {"slug": "the-barber-of-seville", "title": "The Barber of Seville", "company": "El Paso Opera", "place": "El Paso, TX", "year": "2013", "director": "David Grabarkewitz", "photos": "Russell Parkman", "imgs": [{"f": "img/the-barber-of-seville/b0.jpg", "w": 1700, "h": 1168, "src": "attachment"}, {"f": "img/the-barber-of-seville/01.jpg", "w": 1500, "h": 1057, "src": "Barber.Act1.1E.jpg"}, {"f": "img/the-barber-of-seville/02.jpg", "w": 1500, "h": 1147, "src": "Barber.Act1.2B.jpg"}, {"f": "img/the-barber-of-seville/03.jpg", "w": 1500, "h": 1072, "src": "Barber.Act2.2B.jpg"}, {"f": "img/the-barber-of-seville/04.jpg", "w": 1500, "h": 1120, "src": "Barber.Act1.2.jpg"}]}, {"slug": "re-generation", "title": "Re/Generation", "company": "University of North Texas", "place": "Denton, TX", "director": "", "choreo": "Kim Elliott", "photos": "George Wada", "imgs": [{"f": "img/re-generation/01.jpg", "w": 828, "h": 611, "src": "278445387_10158131060055834_9169379342824197817_n.jpeg"}, {"f": "img/re-generation/02.jpg", "w": 827, "h": 797, "src": "278458090_10158131059920834_8850756609947100684_n.jpeg"}, {"f": "img/re-generation/03.jpg", "w": 827, "h": 516, "src": "278315925_10158131058490834_1721270634882923892_n.jpeg"}, {"f": "img/re-generation/04.jpg", "w": 827, "h": 850, "src": "278469885_10158131058335834_3542892252688849482_n.jpeg"}, {"f": "img/re-generation/05.jpg", "w": 827, "h": 779, "src": "278327350_10158131060220834_5094801198626111605_n.jpeg"}]}], "sketches": [{"slug": "sk-hunchback", "title": "The Hunchback of Notre Dame", "sub": "NYU graduate thesis project", "imgs": [{"f": "img/sk-hunchback/01.jpg", "w": 1500, "h": 971, "src": "Aristocrats.jpg"}, {"f": "img/sk-hunchback/02.jpg", "w": 1500, "h": 971, "src": "Court of Miracles.jpg"}, {"f": "img/sk-hunchback/03.jpg", "w": 1199, "h": 1500, "src": "Esmerelda 2.jpg"}, {"f": "img/sk-hunchback/04.jpg", "w": 1195, "h": 1500, "src": "Esmerelda.jpg"}, {"f": "img/sk-hunchback/05.jpg", "w": 1197, "h": 1500, "src": "Frollo.jpg"}, {"f": "img/sk-hunchback/06.jpg", "w": 1500, "h": 971, "src": "Gargoyles.jpg"}, {"f": "img/sk-hunchback/07.jpg", "w": 1197, "h": 1500, "src": "Gypsy King.jpg"}, {"f": "img/sk-hunchback/08.jpg", "w": 1500, "h": 971, "src": "Gypsy.jpg"}, {"f": "img/sk-hunchback/09.jpg", "w": 1500, "h": 1125, "src": "Hell Fire.jpg"}, {"f": "img/sk-hunchback/10.jpg", "w": 1500, "h": 971, "src": "Peasants.jpg"}, {"f": "img/sk-hunchback/11.jpg", "w": 1195, "h": 1500, "src": "Quasimodo.jpg"}, {"f": "img/sk-hunchback/12.jpg", "w": 1500, "h": 964, "src": "Soldiers.jpg"}, {"f": "img/sk-hunchback/13.jpg", "w": 1198, "h": 1500, "src": "phoebus.jpg"}]}, {"slug": "sk-bernarda-alba", "title": "The House of Bernarda Alba", "sub": "Charcoal study", "imgs": [{"f": "img/sk-bernarda-alba/01.jpg", "w": 947, "h": 1500, "src": "DSC_8476.jpg"}, {"f": "img/sk-bernarda-alba/02.jpg", "w": 946, "h": 1500, "src": "DSC_8477.jpg"}, {"f": "img/sk-bernarda-alba/03.jpg", "w": 949, "h": 1500, "src": "DSC_8480.jpg"}, {"f": "img/sk-bernarda-alba/04.jpg", "w": 505, "h": 1500, "src": "DSC_8485.jpg"}, {"f": "img/sk-bernarda-alba/05.jpg", "w": 624, "h": 1500, "src": "DSC_8486.jpg"}]}, {"slug": "sk-romeo-juliet-ballet", "title": "Romeo and Juliet: A Ballet", "sub": "Hudson Guild Theatre, New York", "imgs": [{"f": "img/sk-romeo-juliet-ballet/01.jpg", "w": 1159, "h": 1500, "src": "Juliet.jpg"}, {"f": "img/sk-romeo-juliet-ballet/02.jpg", "w": 1159, "h": 1500, "src": "Lady Capulet.jpg"}, {"f": "img/sk-romeo-juliet-ballet/03.jpg", "w": 1159, "h": 1500, "src": "Mercutio.jpg"}, {"f": "img/sk-romeo-juliet-ballet/04.jpg", "w": 1159, "h": 1500, "src": "Romeo.jpg"}, {"f": "img/sk-romeo-juliet-ballet/05.jpg", "w": 1159, "h": 1500, "src": "Tybalt.jpg"}]}, {"slug": "sk-guys-and-dolls", "title": "Guys and Dolls", "sub": "", "imgs": [{"f": "img/sk-guys-and-dolls/01.jpg", "w": 911, "h": 1500, "src": "HBG-Bushel copy.jpg"}, {"f": "img/sk-guys-and-dolls/02.jpg", "w": 911, "h": 1500, "src": "HBG-Marry copy.jpg"}]}], "hero": [["hair", 0], ["spring-awakening", 0], ["bike-america", 0], ["lion-in-winter", 0], ["lone-star-spirits", 0], ["titus-andronicus", 2], ["born-yesterday", 0], ["the-man-who-came-to-dinner", 2], ["ballad-of-little-jo", 0], ["the-barber-of-seville", 0], ["crystal-city-1969", 0]]};
+const $app = document.getElementById('app');
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const bySlug = Object.fromEntries(D.shows.map(s=>[s.slug,s]));
+let heroTimer = null;
+
+const meta = s => [s.company, s.place].filter(Boolean).join(', ');
+const tile = s => {
+  const i = s.imgs[0];
+  return `<a class="tile" href="#work-${s.slug}"><img src="${i.f}" width="${i.w}" height="${i.h}" alt="${esc(s.title)}" loading="lazy">
+  <div class="t"><b>${esc(s.title)}</b><span>${esc(meta(s))}</span></div></a>`;
+};
+
+const HPOS={'the-barber-of-seville':'50% 100%','lone-star-spirits':'50% 15%'};
+function home(){
+  const slides = D.hero.map(([slug,k])=>({s:bySlug[slug],i:bySlug[slug].imgs[k]}));
+  $app.innerHTML = `
+  <section class="hero" aria-label="Selected productions">
+    ${slides.map((x,n)=>`<img src="${x.i.f}" alt="${esc(x.s.title)}" class="${n===0?'on':''}"${HPOS[x.s.slug]?` style="object-position:${HPOS[x.s.slug]}"`:''}>`).join('')}
+    <div class="cap"><a id="hcap" href="#work-${slides[0].s.slug}"><span id="htitle">${esc(slides[0].s.title)}</span><small id="hmeta">${esc(meta(slides[0].s))}</small></a>
+    <div class="dots">${slides.map((_,n)=>`<button aria-label="Show ${n+1}" aria-current="${n===0}"></button>`).join('')}</div></div>
+  </section>
+  <section class="intro">
+    <h1>Amelia Otto<span>Costume Designer</span></h1>
+  </section>
+  <h2 class="sec"><span>Selected work</span><a href="#work">All ${D.shows.length} productions</a></h2>
+  <div class="wall">${D.shows.slice(0,9).map(tile).join('')}</div>`;
+  let cur = 0;
+  const imgs = [...$app.querySelectorAll('.hero img')], dots = [...$app.querySelectorAll('.dots button')];
+  const show = n => {
+    cur = (n+slides.length)%slides.length;
+    imgs.forEach((im,k)=>im.classList.toggle('on',k===cur));
+    dots.forEach((d,k)=>d.setAttribute('aria-current',k===cur));
+    const s = slides[cur].s;
+    document.getElementById('hcap').href = '#work-'+s.slug;
+    document.getElementById('htitle').textContent = s.title;
+    document.getElementById('hmeta').textContent = meta(s);
+  };
+  dots.forEach((d,k)=>d.addEventListener('click',()=>{show(k);}));
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+    heroTimer = setInterval(()=>show(cur+1),5500);
+  }
+}
+
+function work(){
+  $app.innerHTML = `<div class="head"><div class="kick">Costume design</div><h1>Work</h1></div>
+  <div class="wall">${D.shows.map(tile).join('')}</div>`;
+}
+
+function layoutGallery(imgs, title){
+  let out = '', i = 0, idx = 0;
+  const portrait = m => m.h > m.w*1.08;
+  const fig = (m,cls,n) => `<figure class="${cls}"><button data-n="${n}" aria-label="Open image ${n+1}"><img src="${m.f}" width="${m.w}" height="${m.h}" alt="${esc(title)}, image ${n+1}" loading="lazy"></button></figure>`;
+  while(i<imgs.length){
+    const m = imgs[i];
+    if(!portrait(m)){ out += fig(m,'full',i); i++; }
+    else if(imgs[i+1] && portrait(imgs[i+1])){ out += fig(m,'',i)+fig(imgs[i+1],'',i+1); i+=2; }
+    else { out += fig(m,'solo',i); i++; }
+  }
+  return out;
+}
+
+function project(slug){
+  const k = D.shows.findIndex(s=>s.slug===slug);
+  if(k<0) return notFound();
+  const s = D.shows[k], p = D.shows[(k-1+D.shows.length)%D.shows.length], n = D.shows[(k+1)%D.shows.length];
+  const row = (l,v)=> v?`<div><dt>${l}</dt><dd>${esc(v)}</dd></div>`:'';
+  $app.innerHTML = `<div class="head"><a class="back" href="#work">&larr; All work</a>
+    <h1 style="margin-top:22px">${esc(s.title)}</h1></div>
+    <dl class="credits">
+      ${row('Company', s.company)}${row('Where', s.place)}
+      ${row('Directed by', s.director)}${row('Choreographed by', s.choreo)}
+      ${row('Costume design','Amelia Otto')}${row('Photos by', s.photos)}
+    </dl>
+    ${s.note?`<p class="note">${esc(s.note)}</p>`:''}
+    <div class="gal" id="gal">${layoutGallery(s.imgs, s.title)}</div>
+    <div class="nextprev"><a href="#work-${p.slug}"><small>Previous</small>${esc(p.title)}</a><a href="#work-${n.slug}" style="text-align:right"><small>Next</small>${esc(n.title)}</a></div>`;
+  bindLightbox(document.getElementById('gal'), s.imgs, s.title);
+}
+
+function sketches(){
+  $app.innerHTML = `<div class="head"><div class="kick">Process</div><h1>Sketches</h1>
+    <p>Renderings and studies from productions across opera, musical theatre and drama.</p></div>` +
+    D.sketches.map((g,gi)=>`<section class="skgroup"><h2>${esc(g.title)}</h2>${g.sub?`<p>${esc(g.sub)}</p>`:'<p></p>'}
+      <div class="skgrid" data-g="${gi}">${g.imgs.map((m,n)=>`<button data-n="${n}" aria-label="Open sketch ${n+1}"><img src="${m.f}" width="${m.w}" height="${m.h}" alt="${esc(g.title)}, sketch ${n+1}" loading="lazy"></button>`).join('')}</div></section>`).join('');
+  $app.querySelectorAll('.skgrid').forEach(el=>{ const g=D.sketches[+el.dataset.g]; bindLightbox(el,g.imgs,g.title); });
+}
+
+function about(){
+  $app.innerHTML = `<div class="head"><div class="kick">About</div><h1>Amy Otto</h1></div>
+  <div class="about">
+    <div>
+      <p>Amy Otto designs clothes for people who are about to have a very big night. Sometimes that&rsquo;s a royal family tearing itself apart at Christmas. Sometimes it&rsquo;s a Roman revenge tragedy, a bunker full of nervous young women in 1940s Germany, or a pack of teenagers in 1890s wool discovering rock and roll. She&rsquo;s been dressing all of them, happily, since she got her start in New York City.</p>
+      <p>Her career has covered a lot of ground. She has designed Shakespeare under the Texas sky, where costumes need to survive heat, dirt, and a sword fight. She has designed intimate period dramas where the audience sits close enough to count the buttons. She has designed musicals, university productions, and new work, and she built a college costume shop from the ground up. Every one of those taught her something new about how clothing tells a story.</p>
+      <p>Her work starts with character and story. She wants to know who these people are, what they&rsquo;re hiding, and what they would never be caught dead wearing. From there she builds a world, down to every delicious detail: the right patina on a boot, a lining nobody sees except the actor, a pop of color exactly where your eye needs to land, and textures you&rsquo;ll want to reach out and touch. She has a passion for fashion history, a flair for the dramatic and a soft spot for a sly wink, and she pairs both with a production brain that respects budgets, build schedules, and the shop&rsquo;s sanity. Big feelings, sensible shoes.</p>
+      <p>She is based in Dallas and would love to hear about your next production, especially if someone in it needs to make an entrance.</p>
+    </div>
+    <aside class="facts">
+      <figure class="portrait"><img src="img/amy.jpg" width="1060" height="1600" alt="Amy Otto smiling, with string lights behind her"></figure>
+      <div><h3>Education</h3><p>M.F.A., Design for Theatre<br>NYU Tisch School of the Arts, 2009</p><p>B.F.A., Theatre<br>University of Oklahoma, 2003</p></div>
+      <a class="btn" aria-disabled="true">Curriculum vitae (PDF) &middot; to attach</a>
+    </aside>
+  </div>`;
+}
+
+function contact(){
+  $app.innerHTML = `<div class="head"><div class="kick">Contact</div><h1>Let&rsquo;s talk about your next production</h1></div>
+  <div class="plain"><p>Amelia Otto<br>Costume Designer<br>Dallas, Texas</p>
+  <p><a href="mailto:AmyJPedigo@gmail.com">AmyJPedigo@gmail.com</a><br><a href="tel:+19175281467">917-528-1467</a></p></div>`;
+}
+
+function review(){
+  $app.innerHTML = `<div class="head"><div class="kick">Draft only. Not part of the site.</div><h1>Items to confirm</h1></div>
+  <div class="plain review">
+    <h3>Credits and names</h3>
+    <ul>
+      <li><b>The Importance of Being Earnest:</b> listed as NYU, The Atlas Room (per Driscoll). Photo credit &ldquo;Ella Bromlin&rdquo; comes from the file names. Bus Stop is also now listed as NYU; the &ldquo;Walker Theatre&rdquo; name from her list is kept as the venue, so confirm that is right.</li>
+      <li><b>Xanadu and Sweet Charity:</b> photo credit is spelled Tom Chown on the files and Tom Chow on her show list. This draft uses Chown.</li>
+      <li><b>Name spellings:</b> Danielle Georgiou (CV) vs Georgio (show list); Kim Elliott (CV) vs Elliot (show list). This draft uses the CV spellings.</li>
+      <li><b>Place names added:</b> WaterTower Theatre (Addison, TX), Theatre Three (Dallas), Cara M&iacute;a (Dallas), and Northern Stage (Vermont) are filled in from general knowledge. Her CV only lists the state.</li>
+    </ul>
+    <h3>No photographer listed (credit line omitted)</h3>
+    <ul><li>Crystal City 1969, Bike America, Big Love, The Man Who Came to Dinner, Hair, The Seagull, Frankenstein, Dirty Rotten Scoundrels, Bus Stop</li></ul>
+    <h3>Production years</h3>
+    <ul><li>Production years are hidden everywhere on the site (Work wall, project pages, slideshow captions) on purpose, so the older shows don&rsquo;t read as dated. The years are still kept in the draft&rsquo;s data and can be switched back on. The two degree years on the About page are still shown.</li></ul>
+    <h3>About page</h3>
+    <ul>
+      <li>Her draft paragraph about teaching and former students is left out.</li>
+      <li>The portrait is a candid phone photo, chosen on purpose for a personal feel. The CV PDF is still to add.</li>
+    </ul>
+    <h3>Images</h3>
+    <ul><li>Frankenstein photos are very dark. The web copies could be lightened slightly, with her approval.</li>
+    <li>All photos here are web-size copies. Originals are untouched.</li></ul>
+  </div>`;
+}
+
+function notFound(){ $app.innerHTML = `<div class="head"><h1>Page not found</h1><p><a href="#home" class="back">&larr; Home</a></p></div>`; }
+
+/* lightbox */
+const lb = document.getElementById('lb'), lbImg = lb.querySelector('img'), lbC = lb.querySelector('.c');
+let lbSet = [], lbTitle = '', lbN = 0, lbReturn = null;
+function lbShow(n){ lbN=(n+lbSet.length)%lbSet.length; lbImg.src=lbSet[lbN].f; lbImg.alt=lbTitle; lbC.textContent=lbTitle+' ('+(lbN+1)+' of '+lbSet.length+')'; }
+function lbOpen(set,title,n,from){ lbSet=set; lbTitle=title; lbReturn=from; lb.classList.add('open'); lbShow(n); lb.querySelector('.x').focus(); }
+function lbClose(){ lb.classList.remove('open'); if(lbReturn) lbReturn.focus(); }
+function bindLightbox(root,set,title){ root.addEventListener('click',e=>{ const b=e.target.closest('button[data-n]'); if(b) lbOpen(set,title,+b.dataset.n,b); }); }
+lb.querySelector('.x').onclick=lbClose; lb.querySelector('.p').onclick=()=>lbShow(lbN-1); lb.querySelector('.n').onclick=()=>lbShow(lbN+1);
+lb.addEventListener('click',e=>{ if(e.target===lb) lbClose(); });
+document.addEventListener('keydown',e=>{ if(!lb.classList.contains('open')) return; if(e.key==='Escape') lbClose(); if(e.key==='ArrowLeft') lbShow(lbN-1); if(e.key==='ArrowRight') lbShow(lbN+1); });
+
+/* routing: plain #names, e.g. #work-hair */
+function route(){
+  clearInterval(heroTimer);
+  const h = location.hash.replace(/^#/,'') || 'home';
+  if(h==='home') home();
+  else if(h==='work') work();
+  else if(h.startsWith('work-')) project(h.slice(5));
+  else if(h==='sketches') sketches();
+  else if(h==='about') about();
+  else if(h==='contact') contact();
+  
+  else notFound();
+  const sec = h.startsWith('work')?'work':h;
+  document.querySelectorAll('nav a').forEach(a=>{ if(a.dataset.nav===sec) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',route);
+route();
+</script>
