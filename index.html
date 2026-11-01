@@ -172,7 +172,7 @@ const tile = s => {
   <div class="t"><b>${esc(s.title)}</b><span>${esc(meta(s))}</span></div></a>`;
 };
 
-const HPOS={'the-barber-of-seville':'50% 100%','lone-star-spirits':'50% 15%'};
+const HPOS={'crystal-city-1969':'50% 0%','the-barber-of-seville':'50% 100%','lone-star-spirits':'50% 15%'};
 function home(){
   const slides = D.hero.map(([slug,k])=>({s:bySlug[slug],i:bySlug[slug].imgs[k]}));
   $app.innerHTML = `
