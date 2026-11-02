@@ -63,7 +63,8 @@ h2.sec{font:400 13px/1 var(--body);letter-spacing:.18em;text-transform:uppercase
 h2.sec a{color:var(--glow)}
 
 /* wall */
-.wall{columns:3 300px;column-gap:14px}
+.wall{display:flex;gap:14px;align-items:flex-start}
+.wall .col{flex:1 1 0;min-width:0}
 .tile{display:block;position:relative;break-inside:avoid;margin:0 0 14px;background:var(--ink-2);overflow:hidden}
 .tile img{width:100%;transition:transform .7s ease,filter .4s ease}
 .tile .t{position:absolute;inset:auto 0 0 0;padding:44px 16px 14px;background:linear-gradient(to top,rgba(19,17,16,.9),rgba(19,17,16,0));opacity:0;transition:opacity .3s ease}
@@ -176,6 +177,14 @@ const tile = s => {
   <div class="t"><b>${esc(s.title)}</b><span>${esc(meta(s))}</span></div></a>`;
 };
 
+const wallCols = () => innerWidth>=960?3:innerWidth>=640?2:1;
+const wall = list => {
+  const n = wallCols(), cols = Array.from({length:n},()=>({h:0,html:''}));
+  list.forEach(s=>{ const i=s.imgs[0]; let c=cols[0]; cols.forEach(x=>{ if(x.h<c.h-0.001) c=x; }); c.html+=tile(s); c.h+=i.h/i.w; });
+  return `<div class="wall">${cols.map(c=>`<div class="col">${c.html}</div>`).join('')}</div>`;
+};
+let _wc = wallCols(), _rt;
+addEventListener('resize',()=>{ clearTimeout(_rt); _rt=setTimeout(()=>{ const c=wallCols(); if(c!==_wc){ _wc=c; route(); } },200); });
 const HPOS={'crystal-city-1969':'50% 0%','titus-andronicus':'50% 0%','the-man-who-came-to-dinner':'50% 35%','the-barber-of-seville':'50% 100%','lone-star-spirits':'50% 15%'};
 function home(){
   const slides = D.hero.map(([slug,k])=>({s:bySlug[slug],i:bySlug[slug].imgs[k]}));
@@ -189,7 +198,7 @@ function home(){
     <h1>Amelia Otto<span>Costume Designer</span></h1>
   </section>
   <h2 class="sec"><span>Selected work</span><a href="#work">All ${D.shows.length} productions</a></h2>
-  <div class="wall">${FEAT.map(k=>bySlug[k]).map(tile).join('')}</div>`;
+  ${wall(FEAT.map(k=>bySlug[k]))}`;
   let cur = 0;
   const imgs = [...$app.querySelectorAll('.hero img')], dots = [...$app.querySelectorAll('.dots button')];
   const show = n => {
@@ -214,7 +223,7 @@ function work(){
 function workGroups(){
   const order = FEAT.concat(['lone-star-spirits','frankenstein','the-revolutionists','the-barber-of-seville','re-generation','the-man-who-came-to-dinner','the-seagull','a-midsummer-nights-dream','bus-stop','sweet-charity','dirty-rotten-scoundrels','xanadu','o-pioneers']);
   const rest = D.shows.filter(s=>!order.includes(s.slug));
-  return `<div class="wall">${order.map(k=>bySlug[k]).concat(rest).map(tile).join('')}</div>`;
+  return wall(order.map(k=>bySlug[k]).concat(rest));
 }
 
 function layoutGallery(imgs, title){
