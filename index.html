@@ -142,7 +142,6 @@ footer{border-top:1px solid var(--line);margin-top:72px;padding-top:20px;font-si
   <a class="brand" href="#home">Amelia Otto</a>
   <nav aria-label="Main">
     <a href="#work" data-nav="work">Work</a>
-    <a href="#sketches" data-nav="sketches">Sketches</a>
     <a href="#about" data-nav="about">About</a>
     <a href="#contact" data-nav="contact">Contact</a>
   </nav>
@@ -321,7 +320,7 @@ function route(){
   if(h==='home') home();
   else if(h==='work') work();
   else if(h.startsWith('work-')) project(h.slice(5));
-  else if(h==='sketches') sketches();
+  else if(h==='sketches') location.replace('#work');
   else if(h==='about') about();
   else if(h==='contact') contact();
   
